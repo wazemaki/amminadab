@@ -79,13 +79,14 @@
 
 #include <cctype>
 #include <cmath>
+#include "samugui.h"
 
 enum SamuState {SLEEP, TERMINAL, NETWORK};
 
 class Samu
 {
 public:
-
+    SamuGUI *wpointer;
   Samu ( const char* name, const char* soul ) : name ( name ), soul ( soul )
   {
 #ifndef Q_LOOKUP_TABLE
@@ -111,7 +112,6 @@ public:
     terminal_thread_.join();
     network_thread_.join();
   }
-
   bool run ( void ) const
   {
     return run_;
@@ -287,6 +287,7 @@ public:
 #else
     std::cerr << "Loading Samu..." << std::endl;
 #endif
+
     vi.load ( file );
   }
 
@@ -615,7 +616,7 @@ private:
 
       auto start = std::chrono::high_resolution_clock::now();
 
-      std::cerr << "QL start... ";
+      //std::cerr << "QL start... ";
 
 #ifndef Q_LOOKUP_TABLE
 
@@ -623,7 +624,7 @@ private:
 
       std::stringstream resp;
 
-      resp << samu.name
+      resp << "QL start... " << samu.name
 #ifdef QNN_DEBUG
            << "@"
            << ( samu.sleep_?"sleep":"awake" )
@@ -636,9 +637,10 @@ private:
            <<"> "
            << response;
 
-      std::string r = resp.str();
+      emit samu.wpointer->mThread->test(QString::fromStdString(resp.str()));
+      //std::string r = resp.str();
 
-      std::cerr << r << std::endl;
+      //std::cerr << r << std::endl;
 
 #ifdef NETCHAT
       std::string nr = response.s + ' ' + response.p + ' ' + response.o;
@@ -652,13 +654,13 @@ private:
 
 #else
 
-      std::cerr << ql ( triplets[0], prg ) << std::endl;
+     // std::cerr << ql ( triplets[0], prg ) << std::endl;
 
 #endif
 
-      std::cerr << std::chrono::duration_cast<std::chrono::milliseconds> ( std::chrono::high_resolution_clock::now() - start ).count()
-                << " ms "
-                <<  std::endl;
+      //std::cerr << std::chrono::duration_cast<std::chrono::milliseconds> ( std::chrono::high_resolution_clock::now() - start ).count()
+        //        << " ms "
+          //      <<  std::endl;
 
 #ifndef CHARACTER_CONSOLE
 

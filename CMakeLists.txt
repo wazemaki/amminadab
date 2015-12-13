@@ -46,15 +46,10 @@
  
 cmake_minimum_required(VERSION 2.8.5)
 project(SAMU)
-
+find_package(Qt5Widgets REQUIRED)
 ## remote
 # add_definitions(-DSUPER_OR_REMOTE_COMP)
 #
-# #set(CUDA_LAYERS ON)
-# set(CUDA_LAYERS OFF)
-#
-# #set(DISP_CURSES ON)
-# set(DISP_CURSES OFF)
 
 # TUI
  #add_definitions(-DSUPER_OR_REMOTE_COMP)
@@ -62,12 +57,12 @@ project(SAMU)
  #set(CUDA_LAYERS ON)
  set(CUDA_LAYERS OFF)
 
- set(DISP_CURSES ON)
- #set(DISP_CURSES OFF)
+ #set(DISP_CURSES ON)
+ set(DISP_CURSES OFF)
 
 # Amminadab
 add_definitions(-DLZW_TREE)
-#add_definitions(-DNETCHAT)
+add_definitions(-DNETCHAT)
 
   
 # Ram
@@ -127,22 +122,45 @@ link_directories( ${Boost_LIBRARY_DIRS} )
 include(FindPNGwriter.cmake)
 
 if(PNGwriter_FOUND)
-  include_directories(SYSTEM ${PNGwriter_INCLUDE_DIRS})
-  add_definitions(${PNGwriter_DEFINITIONS})
-  set(LIBS ${LIBS} ${PNGwriter_LIBRARIES})
+    include_directories(SYSTEM ${PNGwriter_INCLUDE_DIRS})
+    add_definitions(${PNGwriter_DEFINITIONS})
+    set(LIBS ${LIBS} ${PNGwriter_LIBRARIES})
 endif(PNGwriter_FOUND)
 
 include(FindLinkGrammar.cmake)
 
 include_directories(${LINK_GRAMMAR_INCLUDE_DIRS})
 
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile ${CMAKE_CURRENT_BINARY_DIR}/doxydoc/htm/index.html)
+    add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_CURRENT_BINARY_DIR}/doxydoc/htm/index.html
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+    VERBATIM)
+endif(DOXYGEN_FOUND)
+
+add_custom_target(
+    srs
+    COMMAND make
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/doc
+)
+
+set(CMAKE_AUTOMOC TRUE)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+QT5_WRAP_CPP(tst_hdr_moc samugui.h)
+QT5_WRAP_UI(tst_form_hdr samugui.ui)
+
+add_library(samugui ${tst_hdr_moc} ${tst_form_hdr})
+qt5_use_modules(samugui Widgets)
+
 if (CUDA_FOUND)
   cuda_compile(CUDASRCS qlc.cu)
   cuda_add_executable(samu ${CUDASRCS} disp.hpp net.hpp nlp.hpp nlp.cpp qlc.h ql.hpp samu.hpp samu.cpp main.cpp )
 else()
-                   add_executable(samu disp.hpp net.hpp nlp.hpp nlp.cpp       ql.hpp samu.hpp samu.cpp main.cpp  )
+  add_executable(samu disp.hpp net.hpp nlp.hpp nlp.cpp       ql.hpp samu.hpp samu.cpp main.cpp samugui )
 endif()
-
+qt5_use_modules(samu Core Gui Widgets)
 target_link_libraries(samu ${LINK_GRAMMAR_LIBRARIES} ${PNGwriter_LIBRARIES} ${Boost_LIBRARIES} ${CURSES_LIBRARIES})
 
 install(TARGETS samu DESTINATION bin)

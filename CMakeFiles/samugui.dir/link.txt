@@ -1,0 +1,2 @@
+/usr/bin/ar cr libsamugui.a  CMakeFiles/samugui.dir/moc_samugui.cpp.o CMakeFiles/samugui.dir/samugui_automoc.cpp.o
+/usr/bin/ranlib libsamugui.a

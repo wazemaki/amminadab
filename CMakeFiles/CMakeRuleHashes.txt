@@ -1,0 +1,6 @@
+# Hashes of file build rules.
+bac5caaeaca8d1055f5ba1ada574eda5 CMakeFiles/samu_automoc
+b4a74c1cc8ac55ed29b80748a5d79e6a CMakeFiles/samugui_automoc
+ee9ef73c8b8c5f272baedefc557c1b87 CMakeFiles/srs
+71538599767ee64b76b53f54f3860d4d moc_samugui.cpp
+6f9b1ae079a7164f023130cd1515bc6b ui_samugui.h

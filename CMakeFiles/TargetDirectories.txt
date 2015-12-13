@@ -1,0 +1,5 @@
+/home/wazemaki/pr/amminadab/amminadab/CMakeFiles/samu.dir
+/home/wazemaki/pr/amminadab/amminadab/CMakeFiles/samu_automoc.dir
+/home/wazemaki/pr/amminadab/amminadab/CMakeFiles/samugui.dir
+/home/wazemaki/pr/amminadab/amminadab/CMakeFiles/samugui_automoc.dir
+/home/wazemaki/pr/amminadab/amminadab/CMakeFiles/srs.dir
