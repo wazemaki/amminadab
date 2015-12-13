@@ -768,7 +768,7 @@
         <section>
             <title>Igény egy grafikus felhasználói felület készítésére</title>
             <para>
-            	A grafikus felület készítésének ötlete a nehezen átlátható és kezelhető szöveges felület miatt merült fel. A 2015-ös prog2 kurzus harmadik védési feladatának indult (illetve jelen sorok írása időpontjában még csak indul, remélem meg is lesz a védés :) ), viszont hamar kedvet kaptam a továbbfeljesztéshez, így remélem hosszú élet áll előtte.
+            	A grafikus felület készítésének ötlete a nehezen átlátható és kezelhető szöveges felület miatt merült fel. A 2015-ös prog2 kurzus harmadik védési feladatának indult (illetve jelen sorok írása időpontjában még csak indul, remélem meg is lesz a védés :) ), viszont hamar kedvet kaptam a továbbfeljesztéshez, így talán hosszú élet áll előtte.
             </para>
             <para>
             	Az elképzelés egy bárki által könnyen használható, sok kényelmi és alap funkciókkal ellátott felület, amit igény esetén a következő PTI-generációk könnyen bővíteni tudnak.
@@ -781,7 +781,7 @@
                     <title>Samu GUI tanulás közben</title>
                     <mediaobject>
                         <imageobject>
-                            <imagedata fileref="img/samugui.png" scale="55" />
+                            <imagedata fileref="img/samugui.png" scale="50" />
                         </imageobject>
                         <textobject>
                             <phrase>Samu GUI</phrase>
@@ -793,7 +793,7 @@
             	A felület jellegének stílusát egyelőre a minimalista jelzővel illetném, ám a funkciók sora - remélem - az idők során bővülni fog.
             </para>
             <para>
-            	A kezelés sem túl bonyolult; az ablak megjelenését követően a Start gombra kattintva Samu a háttérben elkezd tanulni, a fenti szövegmezőn láthatjuk a tanulás kimenetét. A stop gombra kattintva a tanulás leáll, Samu lelke elmentésre kerül.
+            	A kezelés sem túl bonyolult: az ablak megjelenését követően meg kell nyitnunk bemeneti txt fájlunkat, majd a Start gombra kattintva Samu a háttérben elkezd tanulni. A fenti szövegmezőn láthatjuk a tanulás kimenetét. A Stop gombra kattintva a tanulás leáll, Samu lelke elmentésre kerül.
             </para>
             <para>
             	Az ablak tanulás közbeni váratlan bezárása során a tanulás ugyancsak leáll és Samu lelke elmentésre kerül.
@@ -811,13 +811,16 @@
                 Létrehoztam magát az ablakot, ezzel immár semmi probléma nem adódott.
             </para>
             <para>
-                Az ablak és Samu más külön szálon kell hogy fusson annak érdekében, hogy az ablak frissítése és Samu munkája ne függjön egymástól. Létrehoztam egy Thread osztályt, ennek a run() metódusába változtatás nélkül a main() metódusban szereplő kódot írtam.
+                Az ablak és Samu külön szálon kell hogy fusson annak érdekében, hogy az ablak frissítése és Samu munkája ne függjön egymástól. Létrehoztam egy Thread osztályt, ennek a run() metódusába változtatás nélkül a main() metódusban szereplő kódot írtam.
             </para>
             <para>
             	A vezérlést slot-signal párok segítségével készítettem el, mindkét irányba. Tehát a gombok általi vezérlés és a kimenet küldése a grafikus felületre is ezekkel történt.
             </para>
             <para>
                 A felület alap funkciói így működőképessé váltak.
+            </para>
+            <para>
+                Ezután Samu "olvasnivalójának" megnyitási lehetőségét készítettem el QFileDialog használatával.
             </para>
         </section>
         <section>

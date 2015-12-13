@@ -5,13 +5,14 @@
 #include <QThread>
 #include <QtCore>
 
-class MyThread : public QThread
+class SamuThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit MyThread(QObject* parent) :
+    explicit SamuThread(QObject* parent) :
         QThread(parent){
     }
+    QString openfile="bbe";
     void run();
 signals:
     void test(QString);
@@ -31,11 +32,13 @@ class SamuGUI : public QMainWindow
 public:
     explicit SamuGUI(QWidget *parent = 0);
     ~SamuGUI();
-    MyThread *mThread;
+    SamuThread *mThread;
 
 private slots:
     void on_pushButton_clicked();
     void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
 
 private:
     Ui::SamuGUI *ui;

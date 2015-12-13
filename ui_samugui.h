@@ -31,6 +31,7 @@ public:
     QPushButton *pushButton;
     QPushButton *pushButton_2;
     QTextBrowser *textBrowser;
+    QPushButton *pushButton_3;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -44,13 +45,16 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(10, 420, 99, 27));
+        pushButton->setGeometry(QRect(470, 420, 99, 27));
         pushButton_2 = new QPushButton(centralWidget);
         pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
         pushButton_2->setGeometry(QRect(570, 420, 99, 27));
         textBrowser = new QTextBrowser(centralWidget);
         textBrowser->setObjectName(QStringLiteral("textBrowser"));
         textBrowser->setGeometry(QRect(10, 0, 661, 411));
+        pushButton_3 = new QPushButton(centralWidget);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(10, 420, 451, 27));
         SamuGUI->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(SamuGUI);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -73,6 +77,7 @@ public:
         SamuGUI->setWindowTitle(QApplication::translate("SamuGUI", "SamuGUI", 0));
         pushButton->setText(QApplication::translate("SamuGUI", "Start", 0));
         pushButton_2->setText(QApplication::translate("SamuGUI", "Stop", 0));
+        pushButton_3->setText(QApplication::translate("SamuGUI", "Open input file", 0));
     } // retranslateUi
 
 };

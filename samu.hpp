@@ -86,7 +86,7 @@ enum SamuState {SLEEP, TERMINAL, NETWORK};
 class Samu
 {
 public:
-    SamuGUI *wpointer;
+    SamuThread *threadpointer;
   Samu ( const char* name, const char* soul ) : name ( name ), soul ( soul )
   {
 #ifndef Q_LOOKUP_TABLE
@@ -637,7 +637,7 @@ private:
            <<"> "
            << response;
 
-      emit samu.wpointer->mThread->test(QString::fromStdString(resp.str()));
+      emit samu.threadpointer->test(QString::fromStdString(resp.str()));
       //std::string r = resp.str();
 
       //std::cerr << r << std::endl;

@@ -99,7 +99,7 @@ double read_cache ( std::string & key, int &cnt, int &brel )
 
   return sum;
 }
-void MyThread::run(){
+void SamuThread::run(){
 
     /*
      #ifndef Q_LOOKUP_TABLE
@@ -480,11 +480,12 @@ void MyThread::run(){
 }
 
 void SamuGUI::on_pushButton_2_clicked()
-{
-    mThread->terminate();
-
-    while(!mThread->isFinished()){}
-    save_samu(0);
+{save_samu(0);
+    if(mThread->isRunning() && !mThread->isFinished()){
+        mThread->terminate();
+        while(!mThread->isFinished()){sleep(1); std::cerr<<"Waiting..."<<std::endl;}
+    }
+    std::cerr<<"Saved..."<<std::endl;
 }
 
 int main(int argc, char *argv[])
@@ -492,10 +493,12 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     SamuGUI w;
     w.show();
-    samu.wpointer= &w;
+    samu.threadpointer= w.mThread;
     a.exec();
-    w.mThread->terminate();
-    while(!w.mThread->isFinished()){ }
-    save_samu(0);
+    //save_samu(0);
+    if(w.mThread->isRunning() && !w.mThread->isFinished()){
+        w.mThread->terminate();
+        while(!w.mThread->isFinished()){sleep(1); std::cerr<<"Waiting..."<<std::endl;}
+    }
     return 0;
 }

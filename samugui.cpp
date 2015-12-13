@@ -1,6 +1,7 @@
 #include "samugui.h"
 #include "ui_samugui.h"
 #include "moc_samugui.cpp"
+#include<QFileDialog>
 #include <iostream>
 
 SamuGUI::SamuGUI(QWidget *parent) :
@@ -8,12 +9,13 @@ SamuGUI::SamuGUI(QWidget *parent) :
     ui(new Ui::SamuGUI)
 {
     ui->setupUi(this);
-    mThread = new MyThread(this);
+    mThread = new SamuThread(this);
     connect(mThread,SIGNAL(test(QString)),this,SLOT(teszteles(QString)));
 }
 SamuGUI::~SamuGUI()
 {
-    delete mThread;
+    mThread->terminate();
+    while(!mThread->isFinished()){ }
     delete ui;
 }
 
@@ -26,4 +28,8 @@ void SamuGUI::on_pushButton_clicked()
     mThread->start();
 }
 
-
+void SamuGUI::on_pushButton_3_clicked()
+{
+    mThread->openfile=QFileDialog::getOpenFileName(this,"File megnyitása","/","Text File (*.txt)");
+    ui->pushButton_3->setText(mThread->openfile+" opened");
+}

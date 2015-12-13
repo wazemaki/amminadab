@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>470</x>
       <y>420</y>
       <width>99</width>
       <height>27</height>
@@ -48,6 +48,19 @@
       <width>661</width>
       <height>411</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_3">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>420</y>
+      <width>451</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Open input file</string>
     </property>
    </widget>
   </widget>
